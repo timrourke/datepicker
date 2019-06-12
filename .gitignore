@@ -1,0 +1,6 @@
+.idea
+*.log
+coverage/
+dist/*
+!dist/.gitkeep
+node_modules
