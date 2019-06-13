@@ -1,1 +1,3 @@
-import Month from './Month';
+import DatePicker from './DatePicker';
+
+customElements.define('date-picker', DatePicker);
