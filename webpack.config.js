@@ -1,11 +1,8 @@
-// @see https://github.com/liady/webpack-node-externals
-const nodeExternals = require('webpack-node-externals');
 const path = require('path');
 
 module.exports = {
 	cache: false,
 	entry: './src/index.ts',
-	externals: [nodeExternals()],
 	mode: process.env.NODE_ENV || 'production',
 	module: {
 		rules: [
@@ -20,9 +17,18 @@ module.exports = {
 				]
 			},
 			{
-				exclude: /node_modules/,
+				exclude: [
+					/node_modules/
+				],
 				test: /\.ts$/,
-				use: 'ts-loader',
+				use: {
+					loader: 'babel-loader',
+				}
+			},
+			{
+				enforce: "pre",
+				test: /\.js$/,
+				use: ["source-map-loader"],
 			},
 		],
 	},
@@ -37,4 +43,9 @@ module.exports = {
 		],
 	},
 	target: 'web',
+	devServer: {
+		contentBase: path.join(__dirname, 'public'),
+		compress: true,
+		port: 9000,
+	},
 };
