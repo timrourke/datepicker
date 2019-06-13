@@ -1,10 +1,25 @@
 import Week from './Week';
 
 export default class Month {
-
     public static fromToday(): Month {
         return new Month(new Date());
     }
+
+    private readonly monthNames: string[] = [
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+    ];
+
     private readonly fromDate: Date;
 
     constructor(fromDate: Date) {
@@ -24,6 +39,34 @@ export default class Month {
         }
 
         return weeks;
+    }
+
+    public nextMonth(): Month {
+        const firstDayOfNextMonth = new Date(this.firstDayOfMonth());
+
+        firstDayOfNextMonth.setMonth(this.fromDate.getMonth() + 1);
+
+        return new Month(firstDayOfNextMonth);
+    }
+
+    public previousMonth(): Month {
+        const firstDayOfPreviousMonth = new Date(this.firstDayOfMonth());
+
+        firstDayOfPreviousMonth.setMonth(this.fromDate.getMonth() - 1);
+
+        return new Month(firstDayOfPreviousMonth);
+    }
+
+    public name(): string {
+        return this.monthNames[this.firstDayOfMonth().getMonth()];
+    }
+
+    public month(): number {
+        return this.firstDayOfMonth().getMonth();
+    }
+
+    public year(): number {
+        return this.firstDayOfMonth().getFullYear();
     }
 
     private firstDayOfMonth(): Date {

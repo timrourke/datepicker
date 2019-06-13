@@ -9,7 +9,7 @@ export default class Week {
         const firstSundayOfWeek = this.firstSundayOfWeek();
 
         return [0, 1, 2, 3, 4, 5, 6]
-            .map((daysToAdd) => {
+            .map((daysToAdd: number): Date => {
                 const dayOfWeek = new Date(firstSundayOfWeek);
 
                 dayOfWeek.setDate(
